@@ -34,7 +34,12 @@
 #
  
 def print_list(lst):
-  pass
+  def traverse(index):
+    if index > len(lst):
+      return
+    print(lst[index])
+    traverse(index + 1)
+  traverse(0)
 
 # 
 # 2b. Print each item in a list backwards using Helper Method Recursion
