@@ -137,8 +137,14 @@ def flatten(lst):
 #
 
 def power(a, b):
-  def traverse(num):
-    
+  def multiply(num):
+    if num == b:
+      return
+    multiply.res *= a
+    multiply(num + 1)
+  multiply.res = 1
+  multiply(0)
+  return multiply.res
 
 
 #
@@ -151,11 +157,26 @@ def power(a, b):
 #
 
 def merge(lst1, lst2):
-  pass
+  def compare(p1, p2):
+    if (p1 == len(lst1)):
+      compare.res += lst2[p2:len(lst2)]
+      return
+    elif (p2 == len(lst2)):
+      compare.res += lst1[p2:len(lst1)]
+      return
 
+    num1 = lst1[p1]
+    num2 = lst2[p2]
 
-
-
+    if num1 <= num2:
+      compare.res.append(num1)
+      compare(p1 + 1, p2)
+    elif num2 < num1:
+      compare.res.append(num2)
+      compare(p1, p2 + 1)
+  compare.res = []
+  compare(0, 0)
+  return compare.res
 
 
 

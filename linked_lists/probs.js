@@ -232,12 +232,3 @@ LinkedList.prototype.swap = (a, b) => {
 }
 
 
-/*
- *     Extra Credit     
- */
-
-/*
- * Extra Credit 1:
- *
- * Write a function that, given an input of a ListNode, returns true if the 
- * ListNode is in a circular linked_list
