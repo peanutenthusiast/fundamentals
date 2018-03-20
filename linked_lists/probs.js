@@ -127,7 +127,109 @@ LinkedList.prototype.reverse = () => {
  * What is the time and auxiliary space complexity of your solution?
  */
 
+LinkedList.prototype.swap = (a, b) => {
+  if (!this.contains(a) || !this.contains(b) || a === b) {return; }
 
+  let prevA, nodeA, nextA, prevB, nodeB, nextB, currNode = this.head;
+
+  if (currNode.value === a) {
+    prevA = null;
+    nodeA = currNode;
+    nextA = currNode.next;
+  } else if (currNode.value === b) {
+    prevB = null;
+    nodeB = currNode;
+    nextB = currNode.next;
+  }
+
+  while (currNode) {
+    if (currNode.next && currNode.next.value === a && !nodeA) {
+      prevA = currNode;
+      nodeA = currNode.next;
+      afterA = currNode.next.next;
+    } else if (currNode.next && currNode.next.value === b && !nodeB) {
+      prevB = currNode;
+      nodeB = currNode.next;
+      afterB = currNode.next.next;
+    }
+  }
+
+  if (nodeA && nodeB) {
+    if (nextA = nodeB) {
+      if (nodeA === this.head && nodeB === this.tail) {
+        nodeA.next = nextB;
+        nodeB.next = nodeA;
+        this.head = nodeB;
+        this.tail = nodeA;
+      } else if (nodeA === this.head) {
+        nodeA.next = nextB;
+        nodeB.next = nodeA;
+        this.head = nodeB;
+      } else if (nodeB === this.tail) {
+        prevA.next = nodeB;
+        nodeB.next = nodeA;
+        nodeA.next = null;
+        this.tail = nodeA;
+      } else {
+        nodeA.next = null;
+        nodeB.next = null;
+        nodeB.next = nodeA;
+        prevA.next = nodeB;
+        nodeA.next = nextB;
+      }
+    } else if (nextB === nodeA) {
+      if (nodeB === this.head && nodeA === this.tail) {
+        nodeA.next = nodeB;
+        nodeB.next = null;
+        this.head = nodeA;
+        this.tail = nodeB;
+      } else if (nodeB === this.head) {
+        nodeA.next = nodeB;
+        nodeB.next = nextA;
+        this.head = nodeA;
+      } else if (nodeA === this.tail) {
+        prevB.next = nodeA;
+        nodeA.next = nodeB;
+        nodeB.next = null;
+        this.tail = nodeB;
+      } else {
+        prevB.next = nodeA;
+        nodeA.next = nodeB;
+        nodeB.next = nextA;
+      }
+    } else if (afterA !== nodeB && afterB !== nodeA) {
+      if (nodeA === this.head) {
+        this.head = nodeB;
+        nodeB.next = nextA;
+        prevB.next = nodeA;
+        nodeA.next = nextB;
+        if (nodeB === this.tail) {
+          this.tail = nodeA;
+        }
+      } else if (nodeB === this.head) {
+        this.head = nodeA;
+        nodeA.next = nextB;
+        prevA.next = nodeB;
+        nodeB.next = nextA;
+        if (nodeA === this.tail) {
+          this.tail = nodeB;
+        }
+      } else if (nodeA === this.tail) {
+        prevB.next = nodeA;
+        nodeA.next = afterB;
+        prevA.next = nodeB;
+        nodeB.next = nextA;
+        this.tail = nodeB;
+      } else if (nodeB === this.tail) {
+        prevA.next = nodeB;
+        nodeB.next = nextA;
+        prevB.next = nodeA;
+        nodeA.next = nextB;
+        this.tail = nodeA;
+      }
+    }
+  } 
+}
 
 
 /*
@@ -138,4 +240,4 @@ LinkedList.prototype.reverse = () => {
  * Extra Credit 1:
  *
  * Write a function that, given an input of a ListNode, returns true if the 
- * ListNode is in a circul
+ * ListNode is in a circular linked_list
