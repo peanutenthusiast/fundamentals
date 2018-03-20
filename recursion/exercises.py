@@ -35,9 +35,9 @@
  
 def print_list(lst):
   def traverse(index):
-    if index > len(lst):
+    if index == len(lst):
       return
-    print(lst[index])
+    print lst[index]
     traverse(index + 1)
   traverse(0)
 
@@ -54,7 +54,12 @@ def print_list(lst):
 #
 
 def print_reverse(lst):
-  pass
+  def traverse(index):
+    if index < 0:
+      return
+    print lst[index]
+    traverse(index - 1)
+  traverse(len(lst) - 1)
 
 
 # 
@@ -67,7 +72,15 @@ def print_reverse(lst):
 #
  
 def reverse_string(lst):
-  pass
+  def traverse(index):
+    if index < 0:
+      return
+    traverse.result += lst[index]
+    traverse(index - 1)
+  traverse.result = ''
+  traverse(len(lst) - 1)
+  return traverse.result
+
 
 
 #
@@ -81,8 +94,17 @@ def reverse_string(lst):
 #
 
 def list_pairs(lst):
-  pass
-
+  def traverse(index):
+    if (index == len(lst) - 1):
+      traverse.result.append([lst[index], None])
+      return
+    if (index == len(lst)):
+      return
+    traverse.result.append(lst[index:index + 2])
+    traverse(index + 2)
+  traverse.result = []
+  traverse(0)
+  return traverse.result
 
 #
 # 2e. Flatten a nested list using Helper Method of Recursion
@@ -94,8 +116,15 @@ def list_pairs(lst):
 #
 
 def flatten(lst):
-  pass
-
+  def traverse(element):
+    if isinstance(element, int):
+      traverse.res.append(element)
+      return
+    for i in xrange(0, len(element)):
+      traverse(element[i])
+  traverse.res = []
+  traverse(lst)
+  return traverse.res
 
 #
 # 2f. Given a base and an exponent, create a function to find the power using
@@ -108,7 +137,8 @@ def flatten(lst):
 #
 
 def power(a, b):
-  pass
+  def traverse(num):
+    
 
 
 #
